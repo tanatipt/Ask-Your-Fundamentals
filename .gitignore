@@ -1,0 +1,7 @@
+file_cache
+data
+results
+t2-ragbench
+gm_reports_pdf
+.env
+__pycache__

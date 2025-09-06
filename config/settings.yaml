@@ -1,0 +1,46 @@
+default:
+  pdf_path: data/reports/
+  vectorstore_path: index/vector_db_v2
+  lexicaldb_path: index/lexical_db_v1.pkl
+
+  parser_config:
+    output_format: markdown
+    keep_pageheader_in_output : False
+    keep_pagefooter_in_output : False
+
+  chunker_config:
+    chunker_method : MarkdownHeaderTextSplitter
+    chunk_size: 2048
+    chunker_params:
+      headers_to_split_on: 
+        - ('#', 'Header 1')
+        - ("##", "Header 2")
+        - ("###", "Header 3")
+      strip_headers: False
+
+  
+  vectorstore_config:
+    vectorstore_class : Chroma
+    embedding_class : GoogleGenerativeAIEmbeddings
+    vectorstore_params:
+      collection_metadata: 
+        hnsw:space: cosine
+    embedding_params:
+      model : gemini-embedding-001
+    retriever_params:
+      search_type: similarity
+      search_kwargs:
+        k : 5
+
+  lexicaldb_config:
+    lexicaldb_class : BM25Retriever
+    lexicaldb_params: 
+      k : 5
+
+      
+  generator_config:
+    generator_class : ChatGoogleGenerativeAI
+    generator_params:
+      model : gemini-2.5-flash
+      temperature: 0.0
+      top_p : 0.0
