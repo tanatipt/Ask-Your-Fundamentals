@@ -3,5 +3,6 @@ data
 results
 t2-ragbench
 gm_reports_pdf
+storage
 .env
 __pycache__

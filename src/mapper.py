@@ -3,8 +3,10 @@ from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from typing_extensions import Literal
 from langchain_text_splitters.markdown import MarkdownHeaderTextSplitter
 from langchain_chroma import Chroma
-from langchain_community.retrievers import BM25Retriever
+from langchain_community.retrievers import BM25Retriever, TFIDFRetriever
 from langchain_community.vectorstores import FAISS
+from langchain_cohere import CohereRerank
+from typing_extensions import Any
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -17,8 +19,9 @@ llm_map = {
     "ChatOpenAI": ChatOpenAI
 }
 
-lexicaldb_map = {
-    "BM25Retriever" : BM25Retriever
+lexicalstore_map = {
+    "BM25Retriever" : BM25Retriever,
+    "TFIDFRetriever": TFIDFRetriever
 }
 vectorstore_map = {
     "Chroma" : Chroma,
@@ -30,12 +33,29 @@ embedding_map= {
     "OpenAIEmbeddings" : OpenAIEmbeddings
 }
 
+reranker_map = {
+    "CohereRerank" : CohereRerank
+}
 
-def get_class(map_type: Literal['splitter', 'llm', 'vectorstore', 'lexicaldb', 'embedding'], name: str):
+def get_class(map_type: Literal['splitter', 'llm', 'vectorstore', 'lexicalstore', 'embedding', 'reranker'], name: str) -> Any:
+    """
+    Retrieves the class corresponding to the given mapping type and name.
+    Args:
+        map_type (Literal[splitter, llm, vectorstore, lexicalstore, embedding, reranker]): Type of the mapping
+        name (str): Name of the class to retrieve
+
+    Raises:
+        Exception: Mapping type does not exist
+        Exception: Mapping name does not exist in mapping type
+
+    Returns:
+        Any: The class corresponding to the specified mapping type and name.
+    """
     map_dict = {
         "splitter" : splitter_map, 
         "llm" : llm_map,
-        'lexicaldb' : lexicaldb_map,
+        'reranker' : reranker_map,
+        'lexicalstore' : lexicalstore_map,
         "vectorstore" : vectorstore_map,
         "embedding" : embedding_map
     }

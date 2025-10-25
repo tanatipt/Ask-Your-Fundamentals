@@ -1,7 +1,5 @@
 default:
-  pdf_path: data/reports/
-  vectorstore_path: index/vector_db_v2
-  lexicaldb_path: index/lexical_db_v1.pkl
+  base_input_dir: data
 
   parser_config:
     output_format: markdown
@@ -10,37 +8,58 @@ default:
 
   chunker_config:
     chunker_method : MarkdownHeaderTextSplitter
-    chunk_size: 2048
+    chunk_size: 512
+    chunk_overlap: 128
     chunker_params:
       headers_to_split_on: 
         - ('#', 'Header 1')
         - ("##", "Header 2")
         - ("###", "Header 3")
+        - ("####", "Header 4")
       strip_headers: False
 
   
   vectorstore_config:
+    vectorstore_path: storage/vectorstore_512_128
     vectorstore_class : Chroma
     embedding_class : GoogleGenerativeAIEmbeddings
+    use_parent_doc_retriever: False
+
     vectorstore_params:
-      collection_metadata: 
+      collection_metadata:
         hnsw:space: cosine
+
     embedding_params:
       model : gemini-embedding-001
+
     retriever_params:
       search_type: similarity
       search_kwargs:
-        k : 5
+        k : 15
 
-  lexicaldb_config:
-    lexicaldb_class : BM25Retriever
-    lexicaldb_params: 
-      k : 5
+
+  ensemble_config:
+    top_n : 10
+    vectorstore_weight: 0.5
+    lexicalstore_weight: 0.5
+
+  rerank_config:
+    rerank_class : CohereRerank
+    rerank_params:
+      model: rerank-v3.5
+      top_n : 10
+
+
+  lexicalstore_config:
+    lexicalstore_path: storage/lexicalstore_512_128_uni.pkl
+    lexicalstore_class : BM25Retriever
+    lexicalstore_params: 
+      k : 15
 
       
   generator_config:
-    generator_class : ChatGoogleGenerativeAI
+    generator_class : ChatOpenAI
     generator_params:
-      model : gemini-2.5-flash
+      model : gpt-4.1-mini
       temperature: 0.0
       top_p : 0.0
