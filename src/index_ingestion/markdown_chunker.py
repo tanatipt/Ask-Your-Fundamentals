@@ -1,35 +1,10 @@
 from langchain_core.documents import Document
 import ast
 from src.mapper import get_class
-from src.utils import create_chunk, parse_report_path
+from src.index_ingestion.utils import create_chunk, parse_report_path, clean_text
 from dotenv import load_dotenv
-import re
 load_dotenv()
 
-def clean_text(page_content : str) -> str:
-    """
-    Cleans the given page content by removing markdown syntax, HTML tags, and unnecessary whitespace.
-
-    Args:
-        page_content (str): The raw content of the page.
-
-    Returns:
-        str: The cleaned page content.
-    """
-    page_content = page_content.strip()
-    # Replace images ![alt](url) with just alt text
-    page_content = re.sub(r"!\[(.*?)\]\(.*?\)", r"\1", page_content)
-    # Replace hyperlinks [text](url) with just text
-    page_content  = re.sub(r"\[(.*?)\]\(.*?\)", r"\1", page_content)
-    # Remove standalone url
-    page_content  = re.sub(r"https?://\S+", "", page_content)
-    # Remove HTML tags
-    page_content  = re.sub(r"<[^>]+>", "", page_content)
-
-    page_content = re.sub(r"\n{3,}", "\n\n", page_content)
-    page_content = re.sub(r"[ \t]+", " ", page_content)
-
-    return page_content
 
 
 class MarkdownChunker:

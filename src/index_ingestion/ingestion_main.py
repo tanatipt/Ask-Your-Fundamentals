@@ -2,7 +2,7 @@ from config import settings
 from src.index_ingestion.markdown_chunker import MarkdownChunker
 from src.index_ingestion.marker_parser import MarkerParser
 from src.mapper import get_class
-from src.utils import get_file_paths, preprocess_text
+from src.index_ingestion.utils import get_file_paths, preprocess_text
 import pickle
 import json
 import os

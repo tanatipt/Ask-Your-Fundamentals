@@ -1,7 +1,7 @@
 import nest_asyncio
 import fitz
 from dotenv import load_dotenv
-from src.utils import classify_scanned_pdf
+from src.index_ingestion.utils import classify_scanned_pdf
 from marker.converters.pdf import PdfConverter
 from marker.models import create_model_dict
 import gc
