@@ -9,7 +9,7 @@ This project implements an end-to-end Retrieval-Augmented Generation (RAG) syste
 
 When uploading PDFs of annual reports for a public company, we make the following assumptions about the folder structure: each PDF report must be organized by the company’s ticker symbol (e.g., AAPL, AMZN), and each PDF file should be named according to the corresponding reporting year (e.g., 2023.pdf). See the example below for the expected directory layout:
 
-```python
+```bash
 /src/
 └── evaluation_pipeline.py          # Evaluation script to evaluate the retrieval and end-to-end performance of the RAG pipeline.
 └── mapper.py                       # Returns the appropriate class to instantiate depending on the arguments passed.
