@@ -39,7 +39,6 @@ default:
 
 
   ensemble_config:
-    top_n : 10
     vectorstore_weight: 0.5
     lexicalstore_weight: 0.5
 
