@@ -126,10 +126,9 @@ To build the BM25 index, we preprocess the chunked text to enhance search perfor
 
 The diagram below illustrates our RAG pipeline. 
 
-<div style="text-align: center;">
-  <img src="resources/rag-architecture.png" style="max-width: 80%;">
-</div>
-
+<p align="center">
+  <img src="resources/rag-architecture.png" width="30%">
+</p>
 
 
 ### Rewrite Query Node 
@@ -142,7 +141,7 @@ The main functionality of the **rewrite_query** node is to perform two tasks: **
 
 When users interact with a chatbot, the conversation is typically **multi-turn** rather than a single one-off question. This means users often engage in back-and-forth exchanges, asking follow-up questions that depend on the previous context. Therefore, it is crucial to **contextualize** each user query based on the conversation history. Without this, the chatbot may fail to understand questions that rely on prior context.
 
-For instance, if a user first asks, *“What was JPMorgan’s profit in 2024?”* and then follows up with, *“What about its profit in 2025?”*, the second question alone would be ambiguous—since the reference to “it” would lack context. To address this, we introduced a **rewrite_query** step that reformulates the user’s query by incorporating relevant details from the conversation history. This ensures that the rewritten query is **self-contained**, **context-independent**, and fully understandable on its own.
+For instance, if a user first asks, *“What was JPMorgan’s profit in 2024?”* and then follows up with, *“What about its profit in 2025?”*, the second question alone would be ambiguous—since the reference to “it” would lack context. To address this, we introduced a query contextualisation step in this node that reformulates the user’s query by incorporating relevant details from the conversation history. This ensures that the rewritten query is **self-contained**, **context-independent**, and fully understandable on its own.
 
 **Query Intention Classification**
 
