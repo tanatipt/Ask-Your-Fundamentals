@@ -127,7 +127,7 @@ To build the BM25 index, we preprocess the chunked text to enhance search perfor
 The diagram below illustrates our RAG pipeline. 
 
 <p align="center">
-  <img src="resources/rag-architecture.png" width="30%">
+  <img src="resources/rag-architecture.png" width="60%">
 </p>
 
 
