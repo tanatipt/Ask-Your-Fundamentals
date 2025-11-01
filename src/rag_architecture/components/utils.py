@@ -70,13 +70,12 @@ def format_doc(docs : list[Document], include_content = True) -> str:
     return formatted_doc
 
 
-def calculator(thoughts: str, math_expression : str) -> float:
+def calculator(math_expression : str) -> float:
     """
     A simple calculator that evaluates mathematical expressions. Use this tool whenever you need to calculate an expression—do not evaluate it manually.
 
     Args:
-        thoughts (str): Analyse the retrieved contexts carefully to identify the relevant figures needed for the mathematical calculations.
-        math_expression (str): The mathematical expression to evaluate based on your thoughts.
+        math_expression (str): The mathematical expression to evaluate.
 
     Raises:
         e: If the expression is invalid or causes an error (e.g., division by zero).
