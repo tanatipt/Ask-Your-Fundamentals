@@ -4,7 +4,6 @@ from config import settings
 from src.rag_architecture.graph_constructor import GraphConstructor
 from langchain_core.messages import convert_to_messages
 from typing_extensions import Literal
-from langchain_core.messages import convert_to_messages
 
 app = FastAPI()
 graph_constructor = GraphConstructor(
