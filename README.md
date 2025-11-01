@@ -195,9 +195,9 @@ We evaluated our RAG pipeline end-to-end using a combination of LLM-as-a-judge a
 | gpt-4.1-mini | 0.049 | 6.84 | 3.45 | 1242 | 654 |
 | gpt-4.1-mini with Chroma Vectorstore | 0.780 | 4.19 | 1.70 | 19278 | 9327 |
 | gpt-4.1-mini with Hybrid Search and Rerank | 0.797 | 5.59 | 2.19 | 26920 | 20199 |
-| <u>**Final RAG Pipeline**</u> | <u>**0.915**</u> | <u>**5.86**</u> | <u>**2.14**</u> | <u>**21369**</u> | <u>**11363**</u> |
+| <u>**Final RAG Pipeline**</u> | <u>**0.915**</u> | <u>**6.40**</u> | <u>**2.49**</u> | <u>**20738**</u> | <u>**11005**</u> |
 
-Our final RAG pipeline achieved an answer correctness score of 91.5% on our 60-question evaluation dataset, with an averagea latency of 5.86 seconds and average token usage per question of 21,369 tokens
+Our final RAG pipeline achieved an answer correctness score of 91.5% on our 60-question evaluation dataset, with an average latency of 6.40 seconds and average token usage per question of 20,738 tokens
 
 
 
@@ -206,20 +206,22 @@ Our final RAG pipeline achieved an answer correctness score of 91.5% on our 60-q
 
 This section provides instructions on how to install and set up the project locally. Before you begin, please ensure you have the following prerequisites:
 
-1. `Poetry` installed on your system.
-2. A valid `GOOGLE_API_KEY` for accessing **gemini-embedding-001** and `OPENAI_API_KEY` for accessing **GPT** models.
-3. `pyenv` installed, along with Python version 3.12.10 managed through `pyenv`.
+1. `uv` ,`Docker` and `bash` installed on your system.
+2. A valid `GOOGLE_API_KEY` for accessing **gemini-embedding-001** embedding, `OPENAI_API_KEY` for accessing **GPT** models and `COHERE_API_KEY` for accessing the **Cohere reranking-v3.5** model.
 
 Steps to Run the Index Ingestion and RAG Pipeline:
 
-1. Create a `pyenv` virtual environment named `ask-your-files` using the following command: `pyenv virtualenv 3.12.12 ask-your-files`
-2. Activate the virtual environment you just created: `pyenv activate ask-your-files`.
-3. Install project dependencies via `Poetry`:  `poetry install`
-4. Create a `.env` file in the root directory of the project.
-5. Add your credentials to the `.env` file in the following format:
+1. Create a virtual environment with the neccessary packages using `uv sync --all-extras`.
+2. Create a `.env` file in the root directory of the project.
+3. Add your credentials to the `.env` file in the following format:
 ```
 GOOGLE_API_KEY=<google_api_key>
 OPENAI_API_KEY=<openai_api_key>
+COHERE_API_KEY=<cohere_api_key>
 ```
-6. To evaluate the RAG pipeline, use the following command: `python src/evaluation_pipeline.py`
-7. To run the index ingestion pipeline, first upload the PDF files to the `data/reports` directory following the format described above, then execute the following command: `python src/ingestion_main.py`
+4. To converse with the RAG chatbot: 
+    1. Execute the following command to startup a docker container: `bash docker.sh`
+    2. Execute the following command to open a chat terminal that communicates with docker container via FastAPI : `uv run python -m src.chat_terminal`
+5. To run the index ingestion pipeline:
+    1. Upload the PDF files to the `data/reports` directory following the format described above 
+    2. Execute the following command: `uv run python -m src.index_ingestion.ingestion_main`

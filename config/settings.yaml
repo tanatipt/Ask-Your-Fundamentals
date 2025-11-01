@@ -1,6 +1,8 @@
 default:
   base_input_dir: data
-
+  fastapi_endpoint : http://127.0.0.1
+  fastapi_port : 50
+  
   parser_config:
     output_format: markdown
     keep_pageheader_in_output : False
