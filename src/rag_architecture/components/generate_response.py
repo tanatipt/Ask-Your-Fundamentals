@@ -20,7 +20,7 @@ def generate_response(state : State, company_info : List) -> State:
     elif user_intention == "general":
         response = "I’m sorry, I can only help with company or financial analysis questions. I am not designed to respond to casual chat, greetings, or non-financial inquiries."
     elif user_intention == "vague":
-        response = f"Please include the company name so I can provide the correct financial details. I have informaton about the following companies: { ",".join(company_info)}"
+        response = f"Please include the company name so I can provide the correct financial details. I have information about the following companies: { ",".join(company_info)}"
     elif user_intention == "unclear":
         response = "I’m having trouble understanding your message. Could you rephrase it more clearly?"
 

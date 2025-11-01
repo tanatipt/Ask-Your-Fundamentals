@@ -12,6 +12,8 @@ When uploading PDFs of annual reports for a public company, we make the followin
 ```python
 /src/
 └── evaluation_pipeline.py          # Evaluation script to evaluate the retrieval and end-to-end performance of the RAG pipeline.
+└── chat_terminal.py                # Starts a chat terminal that communicates with the RAG chatbot via FastAPI endpoint
+└── app.py                          # FastAPI endpoint for invoking the RAG chatbot graph
 └── mapper.py                       # Returns the appropriate class to instantiate depending on the arguments passed.
 └── qa_creator.py                   # Script to sample questions from the T^2-RAGBench and create the dev set to evaluate our RAG pipeline.
 └── utils.py                        # Utility tools and functions used by RAG pipeline evaluation.
